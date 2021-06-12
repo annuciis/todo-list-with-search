@@ -23,6 +23,10 @@ addForm.addEventListener('submit', e => {
     if(todo != ""){
     generateTemplate(todo);
     addForm.addField.value = "";
+
+    
+    storeTodos()
+    
     }
     
 })
@@ -33,6 +37,8 @@ list.addEventListener('click', e => {
 
     if(e.target.classList.contains('delete')){
         e.target.parentElement.remove(); //parent of icon is li item
+
+        storeTodos();
     }
 })
 
@@ -58,3 +64,17 @@ search.addEventListener('keyup', () => {
 
 
 })
+
+
+
+const storeTodos = () => window.localStorage.todoItems = list.innerHTML;
+
+
+
+window.onload = () => {
+
+       if(window.localStorage.todoItems){
+           list.innerHTML += window.localStorage.todoItems;
+       }
+}
+
